@@ -15,3 +15,8 @@
 .poke:hover > #frontS {
   display: unset;
 }
+
+.dropdown-menu {
+  height: 20rem;
+  overflow: scroll;
+}

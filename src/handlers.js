@@ -1,14 +1,18 @@
 import $ from "jquery";
 import { getPokesIds, getPokesNames, addPoke } from "./pokemon";
 import { showError, clearError } from "./error";
-import { getPoke, getType } from "./pokeapi";
-import { openPokeDraw } from "./pokeDraw";
+import { getPoke } from "./pokeapi";
 
 export function handleTypeClick(event) {
   const typeName = event.target.dataset.name;
-  getType(typeName).then((pokes) => {
-    openPokeDraw(pokes);
-  });
+  getPoke(typeName)
+    .then((pokeData) => {
+      clearError();
+      addPoke(pokeData);
+    })
+    .catch((err) => {
+      showError(`API Error: ${err}`);
+    });
 }
 
 export function handleSearchClick(event) {

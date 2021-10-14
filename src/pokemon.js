@@ -33,16 +33,20 @@ function createTypeDropdown(types) {
   return `
   <div class="btn-group" role="group">
   ${[...types]
-    .map(({ type }) => {
+    .map(({ name, list }) => {
       return `
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        ${type.name}
+        ${name}
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        ${[...list]
+          .map(({ pokemon }) => {
+            return `
+            <li class="dropdown-item type" data-name="${pokemon.name}">${pokemon.name}</li>
+            `;
+          })
+          .join("")}
       </ul>
     </div>
     `;
