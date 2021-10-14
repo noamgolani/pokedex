@@ -12,3 +12,14 @@ export async function getPoke(searchValue) {
     throw `${status} -> ${statusText}`;
   }
 }
+
+export async function getType(searchValue) {
+  try {
+    const response = await axios.get(`${URI}/type/${searchValue}`);
+    return response.data.pokemon;
+  } catch (err) {
+    if (!err.response) throw err;
+    const { status, statusText } = err.response;
+    throw `${status} -> ${statusText}`;
+  }
+}
