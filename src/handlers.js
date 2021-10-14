@@ -5,13 +5,15 @@ import { getPoke } from "./pokeapi";
 
 export function handleTypeClick(event) {
   const typeName = event.target.dataset.name;
-  getPoke(typeName)
-    .then((pokeData) => {
-      addPoke(pokeData);
-    })
-    .catch((err) => {
-      showError(`API Error: ${err}`);
-    });
+  if (getPokesNames().includes(typeName)) showError("Pokemon already exists");
+  else
+    getPoke(typeName)
+      .then((pokeData) => {
+        addPoke(pokeData);
+      })
+      .catch((err) => {
+        showError(`API Error: ${err}`);
+      });
 }
 
 export function handleSearchClick(event) {
