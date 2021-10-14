@@ -26,7 +26,7 @@ export function addPoke(pokeData) {
       </div>
     `);
 
-  $(".type").on("click", handleTypeClick);
+  $(`#${id} .type`).on("click", handleTypeClick);
 }
 
 function createTypeDropdown(types) {
@@ -43,7 +43,11 @@ function createTypeDropdown(types) {
         ${[...list]
           .map(({ pokemon }) => {
             return `
-            <li class="dropdown-item type" data-name="${pokemon.name}">${pokemon.name}</li>
+            <li 
+              class="dropdown-item type"
+              data-name="${pokemon.name}">
+                ${pokemon.name}
+              </li>
             `;
           })
           .join("")}
