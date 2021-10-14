@@ -1,3 +1,4 @@
+//TODO make it a toast
 import $ from "jquery";
 export function showError(msg) {
   clearError();

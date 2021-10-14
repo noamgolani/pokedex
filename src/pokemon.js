@@ -10,23 +10,38 @@ export const getPokesNames = () =>
 
 export function addPoke(pokeData) {
   const { id, name, sprites, weight, height, types } = pokeData;
+
+  const typesHtml = [...types].map(({ type }) => {
+    return `
+              <button type="button" class="btn type btn-outline-primary" data-name="${type.name}">
+                ${type.name}
+              </button>`;
+  });
+
   $("#poke-cont").append(`
-      <div class="poke" id="${id}" data-name="${name}">
-        <div class="info">
-          <h2>${name}</h2>
-          <p>
+      <div class="poke card" id="${id}" data-name="${name}" style="width: 15rem;">
+      <img class="card-img-top" src="${sprites.front_default}" id="frontS">
+      <img class="card-img-top" src="${sprites.back_default}" id="backS">
+        <div class="card-body">
+          <h2 class="card-title">${name}</h2>
+          <p class="card-text">
             Width: ${weight} <br>
             Height: ${height} <br>
             Types:
-            <ul>
-              ${[...types].map(({ type }) => {
-                return `<li class="type" data-name="${type.name}">${type.name}</li>`;
-              })}
-            </ul>
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+            ${[...types]
+              .map(({ type }) => {
+                return `
+              <button type="button" class="btn type btn-outline-primary" data-name="${type.name}">
+                ${type.name}
+              </button>`;
+              })
+              .join("")}
+          </div>
+
+
           </p>
         </div>
-        <img src="${sprites.front_default}" id="frontS">
-        <img src="${sprites.back_default}" id="backS">
       </div>
     `);
 

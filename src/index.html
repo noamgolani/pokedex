@@ -8,12 +8,15 @@
 </head>
 <body>
   <ul id="pokeDraw"></ul>
-  <div class="search-cont">
-    <input type="text" id="searchValue">
-    <button id="search"> Search </button>
-    <p id="error"></p>
-  </div>
-  <div id="poke-cont">
+  <div class="container-md">
+    <div class="input-group mb-3">
+      <input type="text" id="searchValue" class="form-control" placeholder="Search a pokemon" aria-label="Search a pokemon" aria-describedby="search">
+      <button class="btn btn-outline-secondary" type="button" id="search"> Search </button>
+      <p id="error"></p>
+    </div>
+    <div class="container" id="poke-cont">
+
+    </div>
   </div>
 </body>
 </html>
