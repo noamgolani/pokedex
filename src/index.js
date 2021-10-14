@@ -1,29 +1,25 @@
 import "./styles/styles.css";
 
-import axios from "axios";
 import $ from "jquery";
-
-const URI = "https://pokeapi.co/api/v2";
+import { getPoke } from "./pokeapi";
 
 $("#search").on("click", () => {
   const searchValue = $("#searchValue").val().toLowerCase();
-  axios
-    .get(`${URI}/pokemon/${searchValue}`)
-    .then((response) => {
-      if (
-        getPokesNames().includes(searchValue) ||
-        getPokesIds().includes(searchValue)
-      )
-        showError("Already have this pokemon");
-      else {
+
+  if (
+    getPokesNames().includes(searchValue) ||
+    getPokesIds().includes(searchValue)
+  )
+    showError("Pokemon already exists");
+  else
+    getPoke(searchValue)
+      .then((pokeData) => {
         clearError();
-        addPoke(response.data);
-      }
-    })
-    .catch((err) => {
-      const { status, statusText } = err.response;
-      showError(`Request failed -> ${status}: ${statusText}`);
-    });
+        addPoke(pokeData);
+      })
+      .catch((err) => {
+        showError(`API Error: ${err}`);
+      });
 });
 
 $("#poke-cont").on("click", (event) => {
@@ -40,14 +36,20 @@ const getPokesNames = () =>
   [...$("#poke-cont").children(".poke")].map((poke) => poke.dataset.name);
 
 function addPoke(pokeData) {
-  const { id, name, sprites, weight, height } = pokeData;
+  const { id, name, sprites, weight, height, types } = pokeData;
   $("#poke-cont").append(`
-      <div class="poke" id="${id}" data-name="${name}">
+      <div class="poke" id="${id}" data-name="${name}" data-type="${types}">
         <div class="info">
           <h2>${name}</h2>
           <p>
             Width: ${weight} <br>
-            Height: ${height}
+            Height: ${height} <br>
+            Types:
+            <ul>
+              ${[...types].map(({ type }) => {
+                return `<li>${type.name}</li>`;
+              })}
+            </ul>
           </p>
         </div>
         <img src="${sprites.front_default}" id="frontS">
