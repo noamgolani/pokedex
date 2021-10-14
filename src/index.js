@@ -1,3 +1,5 @@
+import "./styles/styles.css";
+
 import axios from "axios";
 import $ from "jquery";
 
