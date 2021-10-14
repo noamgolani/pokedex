@@ -6,10 +6,34 @@ import $ from "jquery";
 const URI = "https://pokeapi.co/api/v2";
 
 $("#search").on("click", () => {
-  axios.get(`${URI}/pokemon/${$("#searchValue").val()}`).then((response) => {
-    const { id, name, sprites, weight, height } = response.data;
-    $("#poke-cont").append(`
-      <div class="poke" id="${id}">
+  const searchValue = $("#searchValue").val().toLowerCase();
+  axios.get(`${URI}/pokemon/${searchValue}`).then((response) => {
+    if (
+      getPokesNames().includes(searchValue) ||
+      getPokesIds().includes(searchValue)
+    )
+      alert("Already have this pokemon");
+    else addPoke(response.data);
+  });
+});
+
+$("#poke-cont").on("click", (event) => {
+  const poke = event.target.closest(".poke");
+  if (!poke) return;
+
+  alert(poke.id);
+});
+
+const getPokesIds = () =>
+  [...$("#poke-cont").children(".poke")].map((poke) => poke.id);
+
+const getPokesNames = () =>
+  [...$("#poke-cont").children(".poke")].map((poke) => poke.dataset.name);
+
+function addPoke(pokeData) {
+  const { id, name, sprites, weight, height } = pokeData;
+  $("#poke-cont").append(`
+      <div class="poke" id="${id}" data-name="${name}">
         <div class="info">
           <h2>${name}</h2>
           <p>
@@ -21,12 +45,4 @@ $("#search").on("click", () => {
         <img src="${sprites.back_default}" id="backS">
       </div>
     `);
-  });
-});
-
-$("#poke-cont").on("click", (event) => {
-  const poke = event.target.closest(".poke");
-  if (!poke) return;
-
-  alert(poke.id);
-});
+}
