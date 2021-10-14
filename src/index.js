@@ -6,3 +6,6 @@ import $ from "jquery";
 import { handleSearchClick } from "./handlers";
 
 $("#search").on("click", handleSearchClick);
+$("#searchValue").on("keypress", (e) => {
+  if (e.key === "Enter") handleSearchClick();
+});
