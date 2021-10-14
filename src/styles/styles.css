@@ -4,6 +4,17 @@
   gap: 1rem;
 }
 
+body {
+  padding: 3rem;
+}
+
+.toast-container {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1;
+}
+
 .poke > #frontS {
   display: none;
 }

@@ -1,13 +1,12 @@
 import $ from "jquery";
 import { getPokesIds, getPokesNames, addPoke } from "./pokemon";
-import { showError, clearError } from "./error";
+import { showError } from "./error";
 import { getPoke } from "./pokeapi";
 
 export function handleTypeClick(event) {
   const typeName = event.target.dataset.name;
   getPoke(typeName)
     .then((pokeData) => {
-      clearError();
       addPoke(pokeData);
     })
     .catch((err) => {
@@ -25,7 +24,6 @@ export function handleSearchClick(event) {
   else
     getPoke(searchValue)
       .then((pokeData) => {
-        clearError();
         addPoke(pokeData);
       })
       .catch((err) => {
