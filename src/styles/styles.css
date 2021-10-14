@@ -32,4 +32,6 @@ body {
 
 .poke:hover > #frontS {
   display: unset;
+  transition: 200;
+  transform: scale(1.5);
 }

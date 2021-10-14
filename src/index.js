@@ -23,3 +23,10 @@ $("#search").on("click", () => {
     `);
   });
 });
+
+$("#poke-cont").on("click", (event) => {
+  const poke = event.target.closest(".poke");
+  if (!poke) return;
+
+  alert(poke.id);
+});
