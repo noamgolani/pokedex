@@ -1,6 +1,35 @@
 body {
   display: flex;
-  background-color: teal;
   margin: 2rem;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#poke-cont {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.poke {
+  display: flex;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 2rem;
+  padding: 2rem;
+  background-color: teal;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.poke > #frontS {
+  display: none;
+}
+
+.poke:hover > #backS {
+  display: none;
+}
+
+.poke:hover > #frontS {
+  display: unset;
 }
