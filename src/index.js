@@ -7,14 +7,23 @@ const URI = "https://pokeapi.co/api/v2";
 
 $("#search").on("click", () => {
   const searchValue = $("#searchValue").val().toLowerCase();
-  axios.get(`${URI}/pokemon/${searchValue}`).then((response) => {
-    if (
-      getPokesNames().includes(searchValue) ||
-      getPokesIds().includes(searchValue)
-    )
-      alert("Already have this pokemon");
-    else addPoke(response.data);
-  });
+  axios
+    .get(`${URI}/pokemon/${searchValue}`)
+    .then((response) => {
+      if (
+        getPokesNames().includes(searchValue) ||
+        getPokesIds().includes(searchValue)
+      )
+        showError("Already have this pokemon");
+      else {
+        clearError();
+        addPoke(response.data);
+      }
+    })
+    .catch((err) => {
+      const { status, statusText } = err.response;
+      showError(`Request failed -> ${status}: ${statusText}`);
+    });
 });
 
 $("#poke-cont").on("click", (event) => {
@@ -45,4 +54,13 @@ function addPoke(pokeData) {
         <img src="${sprites.back_default}" id="backS">
       </div>
     `);
+}
+
+function showError(msg) {
+  clearError();
+  $("#error").append(msg);
+}
+
+function clearError() {
+  $("#error").empty();
 }
