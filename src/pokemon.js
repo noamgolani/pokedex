@@ -11,13 +11,6 @@ export const getPokesNames = () =>
 export function addPoke(pokeData) {
   const { id, name, sprites, weight, height, types } = pokeData;
 
-  const typesHtml = [...types].map(({ type }) => {
-    return `
-              <button type="button" class="btn type btn-outline-primary" data-name="${type.name}">
-                ${type.name}
-              </button>`;
-  });
-
   $("#poke-cont").append(`
       <div class="poke card" id="${id}" data-name="${name}" style="width: 15rem;">
       <img class="card-img-top" src="${sprites.front_default}" id="frontS">
@@ -27,23 +20,33 @@ export function addPoke(pokeData) {
           <p class="card-text">
             Width: ${weight} <br>
             Height: ${height} <br>
-            Types:
-            <div class="btn-group" role="group" aria-label="Basic outlined example">
-            ${[...types]
-              .map(({ type }) => {
-                return `
-              <button type="button" class="btn type btn-outline-primary" data-name="${type.name}">
-                ${type.name}
-              </button>`;
-              })
-              .join("")}
-          </div>
-
-
+            ${createTypeDropdown(types)}
           </p>
         </div>
       </div>
     `);
 
-  $("li.type").on("click", handleTypeClick);
+  $(".type").on("click", handleTypeClick);
+}
+
+function createTypeDropdown(types) {
+  return `
+  <div class="btn-group" role="group">
+  ${[...types]
+    .map(({ type }) => {
+      return `
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        ${type.name}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
+    </div>
+    `;
+    })
+    .join("")}
+  </div>`;
 }
