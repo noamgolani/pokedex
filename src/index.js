@@ -4,8 +4,11 @@ import "bootstrap";
 
 import $ from "jquery";
 import { handleSearchClick } from "./handlers";
+import names from "./names";
 
 $("#search").on("click", handleSearchClick);
 $("#searchValue").on("keypress", (e) => {
   if (e.key === "Enter") handleSearchClick();
 });
+
+console.log(names);
