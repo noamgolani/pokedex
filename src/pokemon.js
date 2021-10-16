@@ -11,7 +11,7 @@ export const getPokesNames = () =>
 export function addPoke(pokeData) {
   const { id, name, sprites, weight, height, types } = pokeData;
 
-  $("#poke-cont").append(`
+  $("#poke-cont").prepend(`
       <div class="poke card" id="${id}" data-name="${name}" style="width: 15rem;">
       <img class="card-img-top" src="${sprites.front_default}" id="frontS">
       <img class="card-img-top" src="${sprites.back_default}" id="backS">
