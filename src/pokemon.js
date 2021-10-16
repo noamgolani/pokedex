@@ -18,7 +18,7 @@ export function addPoke(pokeData) {
         <div class="card-body">
           <h2 class="card-title">${name}</h2>
           <p class="card-text">
-            Width: ${weight} <br>
+            Weight: ${weight} <br>
             Height: ${height} <br>
             ${createTypeDropdown(types)}
           </p>
