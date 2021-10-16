@@ -49,7 +49,7 @@ export function handleSearchChange() {
   autoC.empty();
   suggestions.forEach((sug) => {
     autoC.append(`
-      <li class="list-group-item" data-name="${sug}">${sug}</li>
+      <li class="list-group-item btn" data-name="${sug}">${sug}</li>
     `);
   });
   $("li.list-group-item").on("click", handleTypeClick);
