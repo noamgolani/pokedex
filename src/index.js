@@ -3,12 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
 import $ from "jquery";
-import { handleSearchClick } from "./handlers";
-import names from "./names";
+import { handleSearchClick, handleSearchChange } from "./handlers";
 
 $("#search").on("click", handleSearchClick);
 $("#searchValue").on("keypress", (e) => {
   if (e.key === "Enter") handleSearchClick();
 });
-
-console.log(names);
+$("#searchValue").on("input", handleSearchChange);
