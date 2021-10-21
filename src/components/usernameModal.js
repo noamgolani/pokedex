@@ -20,12 +20,10 @@ export function getUserName() {
   </div>
   `);
 
-  $("#sendUsername").on("click", () => {
-    handleUsername();
-  });
+  $("#sendUsername").on("click", handleUsername);
   $("#usernameInput").on("keypress", (e) => {
     if (e.key === "Enter") {
-      handleSearchClick();
+      handleUsername();
     }
   });
 }

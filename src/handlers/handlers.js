@@ -1,5 +1,6 @@
 import $ from "jquery";
 import { getPokesIds, getPokesNames, addPoke } from "../components/pokemon";
+import { setState } from "../libs/localStorage";
 import { showError } from "../error";
 import { getPoke } from "../libs/pokeapi";
 import names from "../libs/names";
@@ -64,5 +65,11 @@ function clearCurrent() {
 
 export function handleUsername() {
   const username = $("#usernameInput").val().trim();
-  if (username) removeUsernameModal();
+  console.log(username);
+  if (username) {
+    setState("username", username);
+    removeUsernameModal();
+  } else {
+    showError("Please type a username");
+  }
 }

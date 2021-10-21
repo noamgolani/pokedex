@@ -5,6 +5,8 @@ import "bootstrap";
 import $ from "jquery";
 import { handleSearchClick, handleSearchChange } from "./handlers/handlers";
 import { getUserName } from "./components/usernameModal";
+import { init } from "./libs/localStorage";
+init();
 
 $("#search").on("click", handleSearchClick);
 $("#searchValue").on("keypress", (e) => {
