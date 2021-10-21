@@ -1,16 +1,21 @@
 import axios from "axios";
 
-const URI = "https://pokeapi.co/api/v2";
+const URI = "http://localhost:3000";
 
-export async function getPoke(searchValue) {
+export async function getPoke(username, searchValue) {
   try {
-    const response = await axios.get(`${URI}/pokemon/${searchValue}`);
+    const response = await axios.get(`${URI}/pokemon/get/${searchValue}`, {
+      headers: {
+        username,
+      },
+    });
     const pokeData = response.data;
+    console.log(pokeData);
     const typesData = await Promise.all(
-      pokeData.types.map(async ({ type }) => {
+      pokeData.types.map(async ({ name }) => {
         return {
-          name: type.name,
-          list: await getType(type.name),
+          name,
+          list: await getType(name),
         };
       })
     );
@@ -25,7 +30,9 @@ export async function getPoke(searchValue) {
 
 async function getType(searchValue) {
   try {
-    const response = await axios.get(`${URI}/type/${searchValue}`);
+    const response = await axios.get(
+      `https://pokeapi.co/api/v2/type/${searchValue}`
+    );
     return response.data.pokemon;
   } catch (err) {
     if (!err.response) throw err;

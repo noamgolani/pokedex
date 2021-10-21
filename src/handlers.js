@@ -26,7 +26,7 @@ export function handleSearchClick(event) {
   )
     showError("Pokemon already exists");
   else
-    getPoke(searchValue)
+    getPoke("noam", searchValue)
       .then((pokeData) => {
         addPoke(pokeData);
         clearCurrent();

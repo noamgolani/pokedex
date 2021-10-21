@@ -8,13 +8,19 @@ export const getPokesIds = () =>
 export const getPokesNames = () =>
   [...$("#poke-cont").children(".poke")].map((poke) => poke.dataset.name);
 
-export function addPoke(pokeData) {
-  const { id, name, sprites, weight, height, types } = pokeData;
-
+export function addPoke({
+  id,
+  name,
+  front_pic,
+  back_pic,
+  weight,
+  height,
+  types,
+}) {
   $("#poke-cont").prepend(`
       <div class="poke card" id="${id}" data-name="${name}" style="width: 15rem;">
-      <img class="card-img-top" src="${sprites.front_default}" id="frontS">
-      <img class="card-img-top" src="${sprites.back_default}" id="backS">
+      <img class="card-img-top" src="${front_pic}" id="frontS">
+      <img class="card-img-top" src="${back_pic}" id="backS">
         <div class="card-body">
           <h2 class="card-title">${name}</h2>
           <p class="card-text">
