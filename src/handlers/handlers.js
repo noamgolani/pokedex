@@ -1,17 +1,16 @@
 import $ from "jquery";
 import { getPokesIds, getPokesNames, addPoke } from "../components/pokemon";
-import { setState } from "../libs/localStorage";
+import { getState, setState } from "../libs/localStorage";
 import { showError } from "../error";
 import { getPoke } from "../libs/pokeapi";
 import names from "../libs/names";
 import { removeUsernameModal } from "../components/usernameModal";
 
 export function handleTypeClick(event) {
-  console.log(event);
   const typeName = event.target.dataset.name.toLowerCase();
   if (getPokesNames().includes(typeName)) showError("Pokemon already exists");
   else
-    getPoke("noam", typeName)
+    getPoke(getState("username"), typeName)
       .then((pokeData) => {
         addPoke(pokeData);
         clearCurrent();
@@ -29,7 +28,7 @@ export function handleSearchClick(event) {
   )
     showError("Pokemon already exists");
   else
-    getPoke("noam", searchValue)
+    getPoke(getState("username"), searchValue)
       .then((pokeData) => {
         addPoke(pokeData);
         clearCurrent();
