@@ -18,7 +18,7 @@ export function addPoke({
   types,
 }) {
   $("#poke-cont").prepend(`
-      <div class="poke card" id="${id}" data-name="${name}" style="width: 15rem;">
+      <div class="poke card" id="${name}" data-name="${name}" style="width: 15rem;">
       <img class="card-img-top" src="${front_pic}" id="frontS">
       <img class="card-img-top" src="${back_pic}" id="backS">
         <div class="card-body">
@@ -32,7 +32,7 @@ export function addPoke({
       </div>
     `);
 
-  $(`#${id} .type`).on("click", handleTypeClick);
+  $(`#${name} .type`).on("click", handleTypeClick);
 }
 
 function createTypeDropdown(types) {

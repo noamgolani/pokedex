@@ -10,7 +10,6 @@ export async function getPoke(username, searchValue) {
       },
     });
     const pokeData = response.data;
-    console.log(pokeData);
     const typesData = await Promise.all(
       pokeData.types.map(async ({ name }) => {
         return {

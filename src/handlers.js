@@ -5,10 +5,11 @@ import { getPoke } from "./pokeapi";
 import names from "./names";
 
 export function handleTypeClick(event) {
+  console.log(event);
   const typeName = event.target.dataset.name.toLowerCase();
   if (getPokesNames().includes(typeName)) showError("Pokemon already exists");
   else
-    getPoke(typeName)
+    getPoke("noam", typeName)
       .then((pokeData) => {
         addPoke(pokeData);
         clearCurrent();
