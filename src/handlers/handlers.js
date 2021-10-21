@@ -1,8 +1,9 @@
 import $ from "jquery";
-import { getPokesIds, getPokesNames, addPoke } from "./pokemon";
-import { showError } from "./error";
-import { getPoke } from "./pokeapi";
-import names from "./names";
+import { getPokesIds, getPokesNames, addPoke } from "../components/pokemon";
+import { showError } from "../error";
+import { getPoke } from "../libs/pokeapi";
+import names from "../libs/names";
+import { removeUsernameModal } from "../components/usernameModal";
 
 export function handleTypeClick(event) {
   console.log(event);
@@ -59,4 +60,9 @@ export function handleSearchChange() {
 function clearCurrent() {
   $("#searchValue").val("");
   $(".autocomplete").empty();
+}
+
+export function handleUsername() {
+  const username = $("#usernameInput").val().trim();
+  if (username) removeUsernameModal();
 }
