@@ -27,12 +27,20 @@ body {
   display: none;
 }
 
+.pokeball {
+  background-image: url("./pokeball.png");
+}
+
 .poke:hover > #backS {
   display: none;
 }
 
 .poke:hover > #frontS {
   display: unset;
+}
+
+.poke.card {
+  border-color: rgb(88, 88, 88);
 }
 
 .dropdown-menu {

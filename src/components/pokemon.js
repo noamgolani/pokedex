@@ -24,7 +24,9 @@ export function addPoke({
       <img class="card-img-top" src="${front_pic}" id="frontS">
       <img class="card-img-top" src="${back_pic}" id="backS">
         <div class="card-body">
-          <h2 class="card-title">${name}</h2>
+          <h2 class="card-title">${name}
+            <i class="pokeball"></i>
+          </h2>
           <div class="card-text">
           <span>
             Weight: ${weight}
