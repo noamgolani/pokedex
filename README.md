@@ -1,6 +1,6 @@
 # Solution fo the "pokedex" task
 
-### This is [a link](https://noamgolani.github.io/pokedex/dist/) to the github-pages of my solution.
+### This is [a link](https://cyber4spokedex.herokuapp.com/) to the app hosted on heroku.
 
 **Pokedex** is a webapp, for looking up Pokemon's and viewing their info. Using the [poke-api](https://pokeapi.co/).
 
