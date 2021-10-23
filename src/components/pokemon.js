@@ -25,12 +25,19 @@ export function addPoke({
       <img class="card-img-top" src="${back_pic}" id="backS">
         <div class="card-body">
           <h2 class="card-title">${name}</h2>
-          <p class="card-text">
-            Weight: ${weight} <br>
-            Height: ${height} <br>
+          <div class="card-text">
+          <span>
+            Weight: ${weight}
+
+          </span>
+          <span>
+            Height: ${height}
+          </span>
+            <span> Abilities: </span>
             ${createAbilityDropdown(abilities)}
+            <span> Types: </span>
             ${createTypeDropdown(types)}
-          </p>
+          </div>
         </div>
       </div>
     `);
@@ -40,12 +47,12 @@ export function addPoke({
 
 function createTypeDropdown(types) {
   return `
-  <div class="btn-group" role="group">
+  <div>
   ${[...types]
     .map(({ name, list }) => {
       return `
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         ${name}
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -70,12 +77,12 @@ function createTypeDropdown(types) {
 
 function createAbilityDropdown(abilities) {
   return `
-  <div class="btn-group" role="group">
+  <div>
   ${[...abilities]
     .map(({ name, list }) => {
       return `
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         ${name}
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
