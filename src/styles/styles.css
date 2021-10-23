@@ -34,6 +34,13 @@ body {
   height: 2rem;
   display: inline-block;
   margin-left: auto;
+  transition: 100ms;
+}
+
+.pokeball:hover,
+.pokeball:focus {
+  transform: scale(1.3);
+  transition: 100ms;
 }
 
 .poke:hover > #backS {

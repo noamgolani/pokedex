@@ -72,3 +72,8 @@ export function handleUsername() {
     showError("Please type a username");
   }
 }
+
+export function handlePokeballClick(event) {
+  const pokeId = event.target.closest(".poke").id;
+  console.log(pokeId);
+}

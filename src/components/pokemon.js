@@ -1,6 +1,6 @@
 import $ from "jquery";
 
-import { handleTypeClick } from "../handlers/handlers";
+import { handleTypeClick, handlePokeballClick } from "../handlers/handlers";
 
 export const getPokesIds = () =>
   [...$("#poke-cont").children(".poke")].map((poke) => poke.id);
@@ -45,6 +45,7 @@ export function addPoke({
           </div>
     `);
 
+  $(`#${id} .pokeball`).on("click", handlePokeballClick);
   $(`#${id} .type`).on("click", handleTypeClick);
 }
 
