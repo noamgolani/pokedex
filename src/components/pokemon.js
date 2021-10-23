@@ -12,7 +12,6 @@ export function addPoke(
   { id, name, front_pic, back_pic, weight, height, types, abilities },
   catched = false
 ) {
-  console.log(abilities);
   $("#poke-cont").prepend(`
       <div class="poke card ${
         catched ? "catched" : ""

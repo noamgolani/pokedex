@@ -3,6 +3,7 @@ const KEY = "pokedex";
 export function init() {
   const obj = window.localStorage.getItem(KEY);
   if (!obj) window.localStorage.setItem(KEY, "{}");
+  if (!getState("pokemons")) setState("pokemons", {});
 }
 
 export function getState(key) {

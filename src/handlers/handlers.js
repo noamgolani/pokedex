@@ -13,6 +13,9 @@ export function handleTypeClick(event) {
     getPoke(getState("username"), typeName)
       .then((pokeData) => {
         addPoke(pokeData);
+        const pokemons = getState("pokemons");
+        pokemons[pokeData.id] = pokeData;
+        setState("pokemons", pokemons);
         clearCurrent();
       })
       .catch((err) => {
@@ -31,6 +34,9 @@ export function handleSearchClick(event) {
     getPoke(getState("username"), searchValue)
       .then((pokeData) => {
         addPoke(pokeData);
+        const pokemons = getState("pokemons");
+        pokemons[pokeData.id] = pokeData;
+        setState("pokemons", pokemons);
         clearCurrent();
       })
       .catch((err) => {
@@ -83,7 +89,7 @@ export async function handlePokeballClick(event) {
       $(`.poke#${pokeId}`).removeClass("catched");
     } else {
       await catchPoke(getState("username"), pokeId, {
-        pokemon: { data: "sD" },
+        pokemon: getState("pokemons")[pokeId],
       });
       catchedList.push(pokeId);
       setState("catched", catchedLiappendst);

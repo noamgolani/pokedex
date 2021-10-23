@@ -22,6 +22,9 @@ getCatched(username).then((catchedList) => {
   catchedList.forEach((pokeId) => {
     getPoke(username, pokeId).then((pokeData) => {
       addPoke(pokeData, true);
+      const pokemons = getState("pokemons");
+      pokemons[pokeId] = pokeData;
+      setState("pokemons", pokemons);
     });
   });
 });

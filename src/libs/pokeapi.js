@@ -17,7 +17,7 @@ export async function getPoke(username, searchValue) {
   } catch (err) {
     if (!err.response) throw err;
     const { status, statusText, data } = err.response;
-    throw `${status} -> ${statusText}`;
+    throw `${status} -> ${statusText}: ${data.error}`;
   }
 }
 
@@ -32,8 +32,8 @@ export async function getCatched(username) {
     return pokeList;
   } catch (err) {
     if (!err.response) throw err;
-    const { status, statusText } = err.response;
-    throw `${status} -> ${statusText}`;
+    const { status, statusText, data } = err.response;
+    throw `${status} -> ${statusText}: ${data.error}`;
   }
 }
 
@@ -64,17 +64,3 @@ export async function releasePoke(username, pokeId) {
     throw `${status} -> ${statusText}: ${data.error}`;
   }
 }
-//
-//async function getType(searchValue) {
-//  try {
-//    const response = await axios.get(
-//      `https://pokeapi.co/api/v2/type/${searchValue}`
-//    );
-//    return response.data.pokemon;
-//  } catch (err) {
-//    if (!err.response) throw err;
-//    const { status, statusText } = err.response;
-//    throw `${status} -> ${statusText}`;
-//  }
-//}
-//
