@@ -8,19 +8,15 @@ export const getPokesIds = () =>
 export const getPokesNames = () =>
   [...$("#poke-cont").children(".poke")].map((poke) => poke.dataset.name);
 
-export function addPoke({
-  id,
-  name,
-  front_pic,
-  back_pic,
-  weight,
-  height,
-  types,
-  abilities,
-}) {
+export function addPoke(
+  { id, name, front_pic, back_pic, weight, height, types, abilities },
+  catched = false
+) {
   console.log(abilities);
   $("#poke-cont").prepend(`
-      <div class="poke card" id="${id}" data-name="${name}" style="width: 15rem;">
+      <div class="poke card ${
+        catched ? "catched" : ""
+      }" id="${id}" data-name="${name}" style="width: 15rem;">
       <img class="card-img-top" src="${front_pic}" id="frontS">
       <img class="card-img-top" src="${back_pic}" id="backS">
         <div class="card-body">

@@ -51,8 +51,8 @@ body {
   display: unset;
 }
 
-.poke.card {
-  border-color: rgb(88, 88, 88);
+.poke.catched {
+  border-color: green;
 }
 
 .dropdown-menu {

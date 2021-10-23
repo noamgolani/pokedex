@@ -6,7 +6,8 @@ import $ from "jquery";
 import { handleSearchClick, handleSearchChange } from "./handlers/handlers";
 import { getUserName } from "./components/usernameModal";
 import { getState, init, setState } from "./libs/localStorage";
-import { getCatched } from "./libs/pokeapi";
+import { getCatched, getPoke } from "./libs/pokeapi";
+import { addPoke } from "./components/pokemon";
 init();
 
 $("#search").on("click", handleSearchClick);
@@ -18,4 +19,9 @@ $("#searchValue").on("input", handleSearchChange);
 const username = getState("username") ? getState("username") : getUserName();
 getCatched(username).then((catchedList) => {
   setState("catched", catchedList);
+  catchedList.forEach((pokeId) => {
+    getPoke(username, pokeId).then((pokeData) => {
+      addPoke(pokeData, true);
+    });
+  });
 });

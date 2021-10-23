@@ -2,7 +2,7 @@ import $ from "jquery";
 import { getPokesIds, getPokesNames, addPoke } from "../components/pokemon";
 import { getState, setState } from "../libs/localStorage";
 import { showError } from "../error";
-import { catchPoke, getCatched, getPoke } from "../libs/pokeapi";
+import { catchPoke, getPoke, releasePoke } from "../libs/pokeapi";
 import names from "../libs/names";
 import { removeUsernameModal } from "../components/usernameModal";
 
@@ -74,12 +74,21 @@ export function handleUsername() {
 
 export async function handlePokeballClick(event) {
   const pokeId = event.target.closest(".poke").id;
+  const catchedList = getState("catched");
   try {
-    await catchPoke(getState("username"), pokeId, { pokemon: { data: "sD" } });
-    const catchedList = getState("catched");
-    catchedList.append(pokeId);
-    setState("catched", catchedList);
-    $(`.poke#${pokeId}`).addClass("catched");
+    if (catchedList.includes(pokeId)) {
+      await releasePoke(getState("username"), pokeId);
+      const newCatchedList = catchedList.filter((id) => id !== pokeId);
+      setState("catched", newCatchedList);
+      $(`.poke#${pokeId}`).removeClass("catched");
+    } else {
+      await catchPoke(getState("username"), pokeId, {
+        pokemon: { data: "sD" },
+      });
+      catchedList.push(pokeId);
+      setState("catched", catchedLiappendst);
+      $(`.poke#${pokeId}`).addClass("catched");
+    }
   } catch (err) {
     showError(err);
   }

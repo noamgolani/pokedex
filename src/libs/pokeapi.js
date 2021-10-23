@@ -39,15 +39,11 @@ export async function getCatched(username) {
 
 export async function catchPoke(username, pokeId, pokeData) {
   try {
-    const response = await axios.put(
-      `${URI}/pokemon/catch/${pokeId}`,
-      pokeData,
-      {
-        headers: {
-          username,
-        },
-      }
-    );
+    await axios.put(`${URI}/pokemon/catch/${pokeId}`, pokeData, {
+      headers: {
+        username,
+      },
+    });
   } catch (err) {
     if (!err.response) throw err;
     const { status, statusText, data } = err.response;
@@ -55,6 +51,19 @@ export async function catchPoke(username, pokeId, pokeData) {
   }
 }
 
+export async function releasePoke(username, pokeId) {
+  try {
+    await axios.delete(`${URI}/pokemon/release/${pokeId}`, {
+      headers: {
+        username,
+      },
+    });
+  } catch (err) {
+    if (!err.response) throw err;
+    const { status, statusText, data } = err.response;
+    throw `${status} -> ${statusText}: ${data.error}`;
+  }
+}
 //
 //async function getType(searchValue) {
 //  try {
