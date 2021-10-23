@@ -2,7 +2,7 @@ import $ from "jquery";
 import { getPokesIds, getPokesNames, addPoke } from "../components/pokemon";
 import { getState, setState } from "../libs/localStorage";
 import { showError } from "../error";
-import { getPoke } from "../libs/pokeapi";
+import { catchPoke, getCatched, getPoke } from "../libs/pokeapi";
 import names from "../libs/names";
 import { removeUsernameModal } from "../components/usernameModal";
 
@@ -64,7 +64,6 @@ function clearCurrent() {
 
 export function handleUsername() {
   const username = $("#usernameInput").val().trim();
-  console.log(username);
   if (username) {
     setState("username", username);
     removeUsernameModal();
@@ -73,7 +72,15 @@ export function handleUsername() {
   }
 }
 
-export function handlePokeballClick(event) {
+export async function handlePokeballClick(event) {
   const pokeId = event.target.closest(".poke").id;
-  console.log(pokeId);
+  try {
+    await catchPoke(getState("username"), pokeId, { pokemon: { data: "sD" } });
+    const catchedList = getState("catched");
+    catchedList.append(pokeId);
+    setState("catched", catchedList);
+    $(`.poke#${pokeId}`).addClass("catched");
+  } catch (err) {
+    showError(err);
+  }
 }

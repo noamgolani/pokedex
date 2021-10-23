@@ -16,8 +16,42 @@ export async function getPoke(username, searchValue) {
     return pokeData;
   } catch (err) {
     if (!err.response) throw err;
+    const { status, statusText, data } = err.response;
+    throw `${status} -> ${statusText}`;
+  }
+}
+
+export async function getCatched(username) {
+  try {
+    const response = await axios.get(`${URI}/pokemon/`, {
+      headers: {
+        username,
+      },
+    });
+    const pokeList = response.data;
+    return pokeList;
+  } catch (err) {
+    if (!err.response) throw err;
     const { status, statusText } = err.response;
     throw `${status} -> ${statusText}`;
+  }
+}
+
+export async function catchPoke(username, pokeId, pokeData) {
+  try {
+    const response = await axios.put(
+      `${URI}/pokemon/catch/${pokeId}`,
+      pokeData,
+      {
+        headers: {
+          username,
+        },
+      }
+    );
+  } catch (err) {
+    if (!err.response) throw err;
+    const { status, statusText, data } = err.response;
+    throw `${status} -> ${statusText}: ${data.error}`;
   }
 }
 

@@ -4,6 +4,7 @@ import { handleUsername } from "../handlers/handlers";
 
 export function getUserName() {
   $(".container-md").css("opacity", "0");
+
   $("body").append(`
   <div class="modal-dialog modal-dialog-centered" tabindex="-1">
     <div class="modal-content">
