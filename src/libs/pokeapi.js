@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URI = "http://localhost:3000";
+const URI = "https://cyber4spokedex.herokuapp.com";
 
 export async function getPoke(username, searchValue) {
   try {

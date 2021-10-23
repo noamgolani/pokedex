@@ -15,29 +15,24 @@ export function addPoke(
   $("#poke-cont").prepend(`
       <div class="poke card ${
         catched ? "catched" : ""
-      }" id="${id}" data-name="${name}" style="width: 15rem;">
-      <img class="card-img-top" src="${front_pic}" id="frontS">
-      <img class="card-img-top" src="${back_pic}" id="backS">
+      }" id="${id}" data-name="${name}">
+        <img class="card-img-top" src="${front_pic}" id="frontS">
+        <img class="card-img-top" src="${back_pic}" id="backS">
         <div class="card-body">
-        <div class="card-title d-flex">
-        <h2>${name}</h2>
-        <div class="pokeball"></div>
+          <div class="card-title d-flex">
+            <h2 data-bs-toggle="collapse" data-bs-target="#collapse-${id}">${name}</h2>
+            <div class="pokeball"></div>
+          </div>
+          <div class="card-text collapse" id="collapse-${id}">
+            <span> Weight: ${weight} </span>
+            <span> Height: ${height} </span>
+            <span> Abilities: </span>
+            ${createAbilityDropdown(abilities)}
+            <span> Types: </span>
+            ${createTypeDropdown(types)}
+          </div>
         </div>
-          <div class="card-text">
-          <span>
-          Weight: ${weight}
-          
-          </span>
-          <span>
-          Height: ${height}
-          </span>
-          <span> Abilities: </span>
-          ${createAbilityDropdown(abilities)}
-          <span> Types: </span>
-          ${createTypeDropdown(types)}
-          </div>
-          </div>
-          </div>
+      </div>
     `);
 
   $(`#${id} .pokeball`).on("click", handlePokeballClick);
