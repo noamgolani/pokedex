@@ -2,6 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 body {
@@ -24,7 +26,6 @@ body {
 }
 
 .username {
-  position: fixed !important;
   top: 0;
   left: 0;
 }
@@ -61,9 +62,13 @@ body {
   border-color: green;
 }
 
-.dropdown-menu {
+.poke .dropdown-menu {
   height: 20rem;
   overflow: scroll;
+}
+
+.username .dropdown-menu {
+  z-index: 10 !important;
 }
 
 .footer {

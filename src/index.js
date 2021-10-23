@@ -6,8 +6,8 @@ import $ from "jquery";
 import {
   handleSearchClick,
   handleSearchChange,
-  changeUsername,
   handleUsername,
+  clearCatched,
 } from "./handlers/handlers";
 import { getState, init } from "./libs/localStorage";
 import { getUserName } from "./components/usernameModal";
