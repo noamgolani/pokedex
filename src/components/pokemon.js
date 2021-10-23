@@ -16,7 +16,9 @@ export function addPoke({
   weight,
   height,
   types,
+  abilities,
 }) {
+  console.log(abilities);
   $("#poke-cont").prepend(`
       <div class="poke card" id="${id}" data-name="${name}" style="width: 15rem;">
       <img class="card-img-top" src="${front_pic}" id="frontS">
@@ -26,6 +28,7 @@ export function addPoke({
           <p class="card-text">
             Weight: ${weight} <br>
             Height: ${height} <br>
+            ${createAbilityDropdown(abilities)}
             ${createTypeDropdown(types)}
           </p>
         </div>
@@ -47,12 +50,42 @@ function createTypeDropdown(types) {
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         ${[...list]
-          .map(({ pokemon }) => {
+          .map((pokeName) => {
             return `
             <li 
               class="dropdown-item type"
-              data-name="${pokemon.name}">
-                ${pokemon.name}
+              data-name="${pokeName}">
+                ${pokeName}
+              </li>
+            `;
+          })
+          .join("")}
+      </ul>
+    </div>
+    `;
+    })
+    .join("")}
+  </div>`;
+}
+
+function createAbilityDropdown(abilities) {
+  return `
+  <div class="btn-group" role="group">
+  ${[...abilities]
+    .map(({ name, list }) => {
+      return `
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        ${name}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        ${[...list]
+          .map((pokeName) => {
+            return `
+            <li 
+              class="dropdown-item type"
+              data-name="${pokeName}">
+                ${pokeName}
               </li>
             `;
           })
