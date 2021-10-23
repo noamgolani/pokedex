@@ -28,7 +28,9 @@ export async function getCatched(username) {
         username,
       },
     });
-    const pokeList = response.data;
+    const pokeList = response.data.map(
+      (pokemonData) => JSON.parse(pokemonData).id
+    );
     return pokeList;
   } catch (err) {
     if (!err.response) throw err;

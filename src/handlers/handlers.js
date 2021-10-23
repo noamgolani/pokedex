@@ -93,7 +93,7 @@ export async function handlePokeballClick(event) {
   const pokeId = event.target.closest(".poke").id;
   const catchedList = getState("catched");
   try {
-    if (catchedList.includes(pokeId)) {
+    if (catchedList.includes(+pokeId)) {
       await releasePoke(getState("username"), pokeId);
       const newCatchedList = catchedList.filter((id) => id !== pokeId);
       setState("catched", newCatchedList);
