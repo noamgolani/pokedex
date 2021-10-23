@@ -1,7 +1,8 @@
 const KEY = "pokedex";
 
 export function init() {
-  window.localStorage.setItem(KEY, "{}");
+  const obj = window.localStorage.getItem(KEY);
+  if (!obj) window.localStorage.setItem(KEY, "{}");
 }
 
 export function getState(key) {

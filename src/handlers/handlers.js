@@ -39,7 +39,7 @@ export function handleSearchClick(event) {
 }
 
 export function handleSearchChange() {
-  const searchInput = $("#searchValue");
+  const searchInput = $("#searcValue");
   const suggestions =
     searchInput.val().trim() === ""
       ? []
