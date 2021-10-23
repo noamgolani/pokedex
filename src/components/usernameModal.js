@@ -3,7 +3,7 @@ import $ from "jquery";
 import { handleUsername } from "../handlers/handlers";
 
 export function getUserName() {
-  $(".container-md").css("opacity", "0");
+  $(".container-md").css("display", "none");
 
   $("body").append(`
   <div class="modal-dialog modal-dialog-centered" tabindex="-1">
@@ -21,15 +21,17 @@ export function getUserName() {
   </div>
   `);
 
-  $("#sendUsername").on("click", handleUsername);
+  $("#sendUsername").on("click", () => {
+    handleUsername($("#usernameInput").val().trim());
+  });
   $("#usernameInput").on("keypress", (e) => {
     if (e.key === "Enter") {
-      handleUsername();
+      handleUsername($("#usernameInput").val().trim());
     }
   });
 }
 
 export function removeUsernameModal() {
-  $(".container-md").css("opacity", "1");
+  $(".container-md").css("display", "");
   $(".modal-dialog").remove();
 }

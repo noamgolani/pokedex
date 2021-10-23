@@ -2,9 +2,9 @@ import $ from "jquery";
 import { getPokesIds, getPokesNames, addPoke } from "../components/pokemon";
 import { getState, setState } from "../libs/localStorage";
 import { showError } from "../error";
-import { catchPoke, getPoke, releasePoke } from "../libs/pokeapi";
+import { catchPoke, getPoke, releasePoke, getCatched } from "../libs/pokeapi";
 import names from "../libs/names";
-import { removeUsernameModal } from "../components/usernameModal";
+import { removeUsernameModal, getUserName } from "../components/usernameModal";
 
 export function handleTypeClick(event) {
   const typeName = event.target.dataset.name.toLowerCase();
@@ -68,14 +68,25 @@ function clearCurrent() {
   $(".autocomplete").empty();
 }
 
-export function handleUsername() {
-  const username = $("#usernameInput").val().trim();
-  if (username) {
-    setState("username", username);
-    removeUsernameModal();
-  } else {
-    showError("Please type a username");
-  }
+export function handleUsername(username) {
+  if (!username) return showError("Please type a username");
+
+  $(".username > button").empty().append(username);
+  setState("username", username);
+  removeUsernameModal();
+
+  $(".poke").remove();
+  getCatched(username).then((catchedList) => {
+    setState("catched", catchedList);
+    catchedList.forEach((pokeId) => {
+      getPoke(username, pokeId).then((pokeData) => {
+        addPoke(pokeData, true);
+        const pokemons = getState("pokemons");
+        pokemons[pokeId] = pokeData;
+        setState("pokemons", pokemons);
+      });
+    });
+  });
 }
 
 export async function handlePokeballClick(event) {
@@ -92,7 +103,7 @@ export async function handlePokeballClick(event) {
         pokemon: getState("pokemons")[pokeId],
       });
       catchedList.push(pokeId);
-      setState("catched", catchedLiappendst);
+      setState("catched", catchedList);
       $(`.poke#${pokeId}`).addClass("catched");
     }
   } catch (err) {
