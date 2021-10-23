@@ -29,6 +29,11 @@ body {
 
 .pokeball {
   background-image: url("./pokeball.png");
+  background-size: cover;
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  margin-left: auto;
 }
 
 .poke:hover > #backS {

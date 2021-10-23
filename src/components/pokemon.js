@@ -24,24 +24,25 @@ export function addPoke({
       <img class="card-img-top" src="${front_pic}" id="frontS">
       <img class="card-img-top" src="${back_pic}" id="backS">
         <div class="card-body">
-          <h2 class="card-title">${name}
-            <i class="pokeball"></i>
-          </h2>
+        <div class="card-title d-flex">
+        <h2>${name}</h2>
+        <div class="pokeball"></div>
+        </div>
           <div class="card-text">
           <span>
-            Weight: ${weight}
-
+          Weight: ${weight}
+          
           </span>
           <span>
-            Height: ${height}
+          Height: ${height}
           </span>
-            <span> Abilities: </span>
-            ${createAbilityDropdown(abilities)}
-            <span> Types: </span>
-            ${createTypeDropdown(types)}
+          <span> Abilities: </span>
+          ${createAbilityDropdown(abilities)}
+          <span> Types: </span>
+          ${createTypeDropdown(types)}
           </div>
-        </div>
-      </div>
+          </div>
+          </div>
     `);
 
   $(`#${id} .type`).on("click", handleTypeClick);
